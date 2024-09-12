@@ -43,7 +43,7 @@ Create and refine YARA rules that efficiently identify malware in files and proc
 # How to Use
 1.  Clone the repository:
 ```bash
-git clone https://github.com/your-username/YARA-Malware-Detection.git
+git clone https://github.com/vinaypatil-132/Capstone_Project.git
 ```
 # References
 - **YARA Documentation:** https://readthedocs.org/projects/yara/downloads/pdf/v3.1.0/
