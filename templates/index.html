@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YARA File Upload</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles for the animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        #resultsSection {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans p-6">
+    <div class="container mx-auto max-w-lg">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Upload Files for YARA Scan</h1>
+        <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-lg">
+            <input type="file" name="files" multiple required class="block w-full mb-4 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200" />
+            <button type="submit" class="w-full py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition duration-200">Upload and Scan</button>
+        </form>
+
+        <section id="resultsSection" class="hidden mt-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-2">Results:</h2>
+            <pre id="output" class="bg-gray-50 border border-gray-300 p-4 rounded-lg text-gray-700"></pre>
+        </section>
+    </div>
+
+    <script>
+        const form = document.getElementById("uploadForm");
+        const resultsSection = document.getElementById("resultsSection");
+        const output = document.getElementById("output");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            const files = form.querySelector('input[type="file"]').files;
+            for (let i = 0; i < files.length; i++) {
+                formData.append("files", files[i]);
+            }
+
+            fetch("/upload", {
+                method: "POST",
+                body: formData,
+            })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Server error: " + response.statusText);
+                }
+            })
+            .then((data) => {
+                if (data.error) {
+                    output.textContent = "Error: " + data.error;
+                } else {
+                    const rule = data.rule;
+                    const results = data.results;
+
+                    let resultText = `Generated YARA Rule:\n\n${rule}\n\nScan Results:\n`;
+                    for (const file in results) {
+                        const matches = results[file];
+                        resultText += `\nFile: ${file}\nMatches: ${matches.length > 0 ? matches.join(", ") : "No Matches"}\n`;
+                        if (matches.length > 0) {
+                            resultText += "Yes, the malware is detected.\n";
+                        } else {
+                            resultText += "No, the malware is not detected.\n"; // Optional
+                        }
+                    }
+
+                    output.textContent = resultText;
+                }
+                resultsSection.classList.remove("hidden");
+            })
+            .catch((error) => {
+                output.textContent = "Error occurred: " + error.message;
+                resultsSection.classList.remove("hidden");
+            });
+        });
+    </script>
+</body>
+</html>
