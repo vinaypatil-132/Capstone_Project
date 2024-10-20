@@ -1,7 +1,7 @@
 # YARA Malware Detection
 
 - **Project Title:** Effectively Writing YARA Rules to Detect Malware 
-- **Group id:** cdv-4
+- **Group id:** CDV-4
 - **Student Name and Roll number:**
   - Vinay Patil : 20211CDV0045
   - Naveen Kumar M : 20211CDV0026
@@ -38,12 +38,20 @@ Create and refine YARA rules that efficiently identify malware in files and proc
 - Virtual Machines
 
 # Progress
-- **Phase 1:** Completed research and basic rule creation.
+- **Phase 0:** Completed research and understanding of YARA rule syntax and malware behavior.
+- **Phase 1:** Scheduled to begin tomorrow; will involve the development of basic YARA rules and initial testing on known malware samples.
 
 # How to Use
 1.  Clone the repository:
 ```bash
 git clone https://github.com/vinaypatil-132/Capstone_Project.git
 ```
-# References
-- **YARA Documentation:** https://readthedocs.org/projects/yara/downloads/pdf/v3.1.0/
+## References
+
+- YARA Documentation: [YARA Documentation](https://readthedocs.org/projects/yara/downloads/pdf/v3.1.0/)
+- File 1: [10.5505-fujece.2023.09709-3218618](./References/YARA%20Rule%20Optimization%20for%20Malware%20Detection.pdf)
+- File 2: [2009.03779v1](./References/Accelerating YARA Rule Matching with GPU Parallelism.pdf)
+- File 3: [2111.13910v1](./References/Machine Learning for Automated YARA Rule Generation.pdf)
+- File 4: [NeuroYARA: Learning to Rank for YARA Rules Generation](./References/NeuroYara Deep Learning for YARA Rule Ranking.pdf)
+- File 5: (./References/Generic YARA Rules for Broad Malware Detection.pdf)
+- File 6: (./References/Pattern_Matching_in_YARA_Improved_Aho-Corasick_Algorithm.pdf)
