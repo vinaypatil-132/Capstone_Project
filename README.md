@@ -1,4 +1,4 @@
-# YARA Malware Detection
+# Effectively writing YARA rules to detect malwares​
 
 - **Project Title:** Effectively Writing YARA Rules to Detect Malware 
 - **Group id:** CDV-4
