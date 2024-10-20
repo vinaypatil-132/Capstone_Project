@@ -53,5 +53,5 @@ git clone https://github.com/vinaypatil-132/Capstone_Project.git
 - File 2: [2009.03779v1](./References/Accelerating%20YARA%20Rule%20Matching%20with%20GPU%20Parallelism.pdf)
 - File 3: [2111.13910v1](./References/Machine%20Learning%20for%20Automated%20YARA%20Rule%20Generation.pdf)
 - File 4: [NeuroYARA: Learning to Rank for YARA Rules Generation](./References/NeuroYara%20Deep%20Learning%20for%20YARA%20Rule%20Ranking.pdf)
-- File 5: (./References/Generic%20YARA%20Rules%20for%20Broad%20Malware%20Detection.pdf)
-- File 6: (./References/Pattern_Matching_in_YARA_Improved_Aho-Corasick_Algorithm.pdf)
+- File 5: [Generic yara rules for malware detection](./References/Generic%20YARA%20Rules%20for%20Broad%20Malware%20Detection.pdf)
+- File 6: [Pattern matching in YARA improved Aho-Corasick Algorithm](./References/Pattern_Matching_in_YARA_Improved_Aho-Corasick_Algorithm.pdf)
