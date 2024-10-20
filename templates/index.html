@@ -18,14 +18,42 @@
         #resultsSection {
             animation: fadeIn 0.5s ease-in-out;
         }
+        /* Additional styling for better aesthetics */
+        body {
+            background: linear-gradient(to right, #f7fafc, #e2e8f0);
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        input[type="file"] {
+            border-radius: 0.375rem; /* rounded-lg */
+        }
+        button {
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #38a169; /* hover:bg-green-600 */
+            transform: scale(1.05);
+        }
+        #output {
+            max-height: 400px; /* Limit height for better scrolling */
+            overflow-y: auto; /* Enable scrolling */
+        }
     </style>
 </head>
-<body class="bg-gray-100 font-sans p-6">
-    <div class="container mx-auto max-w-lg">
+<body class="flex items-center justify-center min-h-screen p-6">
+    <div class="container mx-auto max-w-lg p-6 rounded-lg bg-white">
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Upload Files for YARA Scan</h1>
         <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-lg">
             <input type="file" name="files" multiple required class="block w-full mb-4 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200" />
-            <button type="submit" class="w-full py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition duration-200">Upload and Scan</button>
+            <div class="flex space-x-4">
+                <button type="submit" class="w-full py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition duration-200">Upload and Scan</button>
+                <button type="button" id="clearButton" class="w-full py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition duration-200">Clear</button>
+            </div>
         </form>
 
         <section id="resultsSection" class="hidden mt-6">
@@ -38,12 +66,14 @@
         const form = document.getElementById("uploadForm");
         const resultsSection = document.getElementById("resultsSection");
         const output = document.getElementById("output");
+        const clearButton = document.getElementById("clearButton");
+        const fileInput = form.querySelector('input[type="file"]');
 
         form.addEventListener("submit", function (event) {
             event.preventDefault();
 
             const formData = new FormData();
-            const files = form.querySelector('input[type="file"]').files;
+            const files = fileInput.files;
             for (let i = 0; i < files.length; i++) {
                 formData.append("files", files[i]);
             }
@@ -85,6 +115,13 @@
                 output.textContent = "Error occurred: " + error.message;
                 resultsSection.classList.remove("hidden");
             });
+        });
+
+        // Clear button functionality
+        clearButton.addEventListener("click", function () {
+            fileInput.value = ""; // Clear the file input
+            output.textContent = ""; // Clear the results
+            resultsSection.classList.add("hidden"); // Hide the results section
         });
     </script>
 </body>
